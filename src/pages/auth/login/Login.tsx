@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import './Login.scss';
-import Input from "../../../components/input/Input";
+import Input from "@components/input/Input";
 import { FaArrowRight} from "react-icons/fa";
-import Button from "../../../components/button/Button";
+import Button from "@components/button/Button";
 import { Link } from "react-router-dom";
-import { authService } from "../../../services/api/auth/auth.service";
-import { IUserDocument } from "../../../services/utils/types/user";
+import { authService } from "@services/api/auth/auth.service";
+import { IUserDocument } from "@services/utils/types/user";
 
 const Login: FC = () => {
 

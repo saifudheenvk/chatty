@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react"
 import './Register.scss';
-import Input from "../../../components/input/Input";
-import Button from "../../../components/button/Button";
-import { authService } from "../../../services/api/auth/auth.service";
-import { Utils } from "../../../services/utils/utils.service";
-import { IUserDocument } from "../../../services/utils/types/user";
+import Input from "@components/input/Input";
+import Button from "@components/button/Button";
+import { authService } from "@services/api/auth/auth.service";
+import { IUserDocument } from "@services/utils/types/user";
+import { Utils } from "@services/utils/utils.service";
 
 
 const Register: FC = () => {

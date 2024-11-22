@@ -26,10 +26,7 @@
       "@colors/*": ["src/colors/*"],
       "@redux/*": ["src/redux-toolkit/*"],
       "@root/*": ["src/*"]
-    },
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclaration": true }
-    ]
-  }
+    }
+  },
+  "include": ["src/**/*"]
 }
