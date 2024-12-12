@@ -21,3 +21,9 @@ export interface IPostData {
   videoVersion?: string;
   image?: string;
 }
+
+
+export interface IDropdownItem {
+  topText: string;
+  subText: string;
+}

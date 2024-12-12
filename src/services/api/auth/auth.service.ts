@@ -22,6 +22,11 @@ class AuthService {
     const response = await axiosInstance.post(`/auth/reset-password/${token}`, body);
     return response;
   }
+
+  async signOut() {
+    const response = await axiosInstance.get('/auth/signout');
+    return response;
+  }
 }
 
 

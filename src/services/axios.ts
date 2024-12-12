@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = `${process.env.REACT_APP_BASE_ENDPOINT}/api/v1`;
+export const BASE_URL = `${process.env.REACT_APP_BASE_ENDPOINT}/api/v1`;
+export const APP_ENVIRONMENT: 'local' | 'development' | 'staging' | 'production' = 'development';
+
+
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,

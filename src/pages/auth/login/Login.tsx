@@ -3,9 +3,13 @@ import './Login.scss';
 import Input from "@components/input/Input";
 import { FaArrowRight} from "react-icons/fa";
 import Button from "@components/button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authService } from "@services/api/auth/auth.service";
 import { IUserDocument } from "@services/utils/types/user";
+import { useAppDispatch } from "@hooks/redux";
+import useLocalStorage from "@hooks/useLocalStorage";
+import useSessionStorage from "@hooks/useSessionStorage";
+import { Utils } from "@services/utils/utils.service";
 
 const Login: FC = () => {
 
@@ -18,6 +22,12 @@ const Login: FC = () => {
   const [user, setUser] = useState<IUserDocument | null>(null);
   const [keepLoggedIn, setKeepLoggedIn] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [setStoredUsername] = useLocalStorage('username', 'set');
+  const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [pageReload] = useSessionStorage('pageReload', 'set');
+
   const loginUser = async (event: React.FormEvent) => {
     setLoading(true);
     event.preventDefault();
@@ -26,10 +36,11 @@ const Login: FC = () => {
         username,
         password
       })
-      console.log(result);
-      setUser(result.data.user);
+      setLoggedIn(keepLoggedIn);
+      setStoredUsername(username);
       setAlertType('alert-success');
       setHasError(false);
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error: any) {
       setHasError(true);
       setAlertType('alert-error');
@@ -42,9 +53,9 @@ const Login: FC = () => {
   useEffect(() => {
     if(loading && !user) return;
     if(user) {
-      setLoading(false);
+      navigate('/app/social/streams');
     }
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   return (
     <div className="auth-inner">

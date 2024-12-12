@@ -5,6 +5,10 @@ import Button from "@components/button/Button";
 import { authService } from "@services/api/auth/auth.service";
 import { IUserDocument } from "@services/utils/types/user";
 import { Utils } from "@services/utils/utils.service";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@hooks/redux";
+import useLocalStorage from "@hooks/useLocalStorage";
+import useSessionStorage from "@hooks/useSessionStorage";
 
 
 const Register: FC = () => {
@@ -17,6 +21,12 @@ const Register: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [user, setUser] = useState<IUserDocument | null>(null);
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [setStoredUsername] = useLocalStorage('username', 'set');
+  const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [pageReload] = useSessionStorage('pageReload', 'set');
 
   const registerUser = async (event: React.FormEvent) => {
     setLoading(true);
@@ -31,15 +41,11 @@ const Register: FC = () => {
         avatarColor,
         avatarImage
       });
-      setUser(result.data.user);
-      //set loggedin true
-      // set user to localstorage
-      // dispatch user to redux
+      setLoggedIn(true);
+      setStoredUsername(username);
       setAlertType('alert-success');
       setHasError(false);
-      setTimeout(() => {
-        window.location.href = '/';
-      })
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error: any) {
       setHasError(true);
       setAlertType('alert-error');
@@ -52,9 +58,9 @@ const Register: FC = () => {
   useEffect(() => {
     if(loading && !user) return;
     if(user) {
-      setLoading(false);
+      navigate('/app/social/streams');
     }
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   return (
     <div className="auth-inner">

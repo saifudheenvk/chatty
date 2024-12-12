@@ -5,7 +5,7 @@ import { FC } from "react";
 interface IProps {
   className: string;
   label: string;
-  disabled: boolean;
+  disabled?: boolean;
   handleClick?: () => void
 }
 
