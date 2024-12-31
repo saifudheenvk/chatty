@@ -5,7 +5,7 @@ import { AxiosResponse } from 'axios';
 import { Dispatch } from '@reduxjs/toolkit';
 import { APP_ENVIRONMENT } from '@services/axios';
 import { IDropdownItem } from './types/post';
-import { clearNotification } from '@redux/reducers/notifications/notifications.reducer';
+import { addNotifications, clearNotification } from '@redux/reducers/notifications/notifications.reducer';
 
 
 export class Utils {
@@ -51,6 +51,14 @@ export class Utils {
     setLoggedIn(false);
   }
 
+  static dispatchNotification(message: string, type: "success" | "error" | "info" | "warning", dispatch: Dispatch) {
+    dispatch(addNotifications({ message, type }));
+  }
+
+  static dispatchClearNotification(dispatch: Dispatch) {
+    dispatch(clearNotification());
+  }
+
   static appEnvironment() {
     switch (APP_ENVIRONMENT) {
       case 'local':
@@ -82,6 +90,14 @@ export class Utils {
     items.push(item);
     setSettings(items);
     return items;
+  }
+
+  static appImageUrl(version: string, id: string) {
+    if (typeof version === 'string' && typeof id === 'string') {
+      version = version.replace(/['"]+/g, '');
+      id = id.replace(/['"]+/g, '');
+    }
+    return `https://res.cloudinary.com/dyamr9ym3/image/upload/v${version}/${id}`;
   }
 
 }

@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "@hooks/redux";
+import { useAppSelector } from "@hooks/redux";
 import { fontAwesomeIcons, ISideBarItem, sideBarItems } from "@services/utils/static.data";
 import { useEffect, useState } from "react";
-import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
 
 
@@ -11,7 +11,6 @@ export const Sidebar = () => {
   const { profile } = useAppSelector((state) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const checkUrl = (name: string) => {
     return location.pathname.includes(name.toLowerCase());

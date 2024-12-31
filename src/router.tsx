@@ -69,6 +69,10 @@ const AppRoutes = () => {
         {
           path: 'profile/:username',
           element:<Suspense fallback={<div>Loading...</div>}><Profile/></Suspense>
+        },
+        {
+          path: 'videos',
+          element: <Suspense fallback={<div>Loading...</div>}><Videos/></Suspense>
         }
       ]
     },

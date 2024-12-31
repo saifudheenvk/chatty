@@ -44,6 +44,10 @@ export type IPrivacy = {
   icon: JSX.Element;
 }
 
+export interface ReactionsMap {
+  [key: string]: string;
+}
+
 
 export const sideBarItems: ISideBarItem[] = [
   {
@@ -212,7 +216,8 @@ export const emptyPostData: IPostData = {
   createdAt: new Date()
 };
 
-export const reactionsMap = {
+
+export const reactionsMap: ReactionsMap = {
   like,
   love,
   wow,

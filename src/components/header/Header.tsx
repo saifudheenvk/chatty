@@ -52,8 +52,8 @@ const Header:FC = () => {
       Utils.clearStore( dispatch, deleteStorageUsername, deleteSessionPageReload, setLoggedIn );
       await authService.signOut();
     navigate('/');
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      Utils.dispatchNotification(error?.response?.data?.message, 'error', dispatch);
     }
   }
 

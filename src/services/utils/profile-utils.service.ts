@@ -1,4 +1,4 @@
-import { createSearchParams, NavigateFunction } from 'react-router-dom';
+import { NavigateFunction } from 'react-router-dom';
 import { IUserDocument } from './types/user';
 
 export class ProfileUtils {

@@ -31,7 +31,7 @@ const Toast: FC<ToastProps> = (props) => {
     setList([...listData.current]);
     if (!listData.current.length) {
       list.length = 0;
-      // Utils.dispatchClearNotification(dispatch);
+      Utils.dispatchClearNotification(dispatch);
     }
   }, [list, dispatch]);
 
